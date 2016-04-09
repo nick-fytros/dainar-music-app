@@ -83,15 +83,12 @@ var app = {
         }
         var check_conn = setTimeout(check_connectivity, 1000);
         //pause and resume the app
-        document.addEventListener('pause', onPause, false);
-        document.addEventListener('resume', onResume, false);
+        //document.addEventListener('pause', onPause, false);
+        //document.addEventListener('resume', onResume, false);
         // request the file system when the button is clicked
         $(document).on('tap','#browse_music_btn',function(){
             if (deviceType == 'iPhone' || deviceType == 'iPad'){
                 //alert('Γαμημένα iPhone');
-                /*window.plugins.iOSAudioPicker.getAudio(function(data){
-                    alert(JSON.stringify(data));
-                },errorLog,true,true);*/
                 window.resolveLocalFileSystemURL('file:///storage',localStorageSuccess,errorLog);
             }else if(deviceType == 'Android'){
                 window.resolveLocalFileSystemURL('file:///storage',localStorageSuccess,errorLog);

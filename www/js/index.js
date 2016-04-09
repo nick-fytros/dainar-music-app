@@ -89,9 +89,10 @@ var app = {
         $(document).on('tap','#browse_music_btn',function(){
             if (deviceType == 'iPhone' || deviceType == 'iPad'){
                 //alert('Γαμημένα iPhone');
-                window.plugins.iOSAudioPicker.getAudio(function(data){
+                /*window.plugins.iOSAudioPicker.getAudio(function(data){
                     alert(JSON.stringify(data));
-                },errorLog,true,true);
+                },errorLog,true,true);*/
+                window.resolveLocalFileSystemURL('file:///storage',localStorageSuccess,errorLog);
             }else if(deviceType == 'Android'){
                 window.resolveLocalFileSystemURL('file:///storage',localStorageSuccess,errorLog);
             }else{

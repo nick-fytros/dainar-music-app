@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+        <title>DainarMusic</title>
+    </head>
+    <body>
+        <div class="app">
+            <!-- FIRST PAGE -->
+            <div data-role="page" id="upload_page">
+                <div class="ui-body-b ui-body">
+                    <div class="connection_status">
+                        <h4>Connecting</h4>
+                        <div class="dot"></div>
+                    </div>
+                    <h1></h1>
+                    <div class="title"></div>
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a href="#upload_page" data-icon="cloud" data-transition="slide" class="ui-btn-active ui-focus ui-state-persist">Upload</a></li>
+                            <li><a href="#start_page" data-icon="power" data-transition="slide" class="get_music_files">Music</a></li>
+                            <li><a href="#playlist_page" data-transition="slide" data-icon="bars">Playlists</a></li>
+                            <li><a href="#settings_page" data-transition="slide" data-icon="gear">Settings</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ui-grid-solo">
+                    <div class="ui-block-a">
+                        <br>
+                        <div id="disk_usage" class="progress">
+                            <div class="bar progress-bar progress-bar-info" style="width: 0%;" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a"><button class="ui-btn ui-icon-back ui-btn-icon-left ui-btn-b" id="browse_back_btn">Back</button></div>
+                    <div class="ui-block-b"><button class="ui-btn ui-btn-b" id="browse_music_btn">Browse for music</button></div>
+                </div>
+                <div class="ui-grid-solo">
+                    <div class="ui-block-a">
+                        <ul data-role="listview" data-inset="false" id="filesystem_navigation_list"></ul>
+                        <div data-role="popup" id="upload_success_popup">
+                            <p>Music files uploaded successfully!</p>
+                        </div>
+                        <div id="progress" class="progress">
+                            <div class="bar progress-bar progress-bar-success progress-bar-striped active", style="width:0%;", role="progressbar",aria-valuemin="0",aria-valuemax="100",aria-valuenow="0">
+                            </div>
+                        </div>
+                        <h3 id="files_uploaded"></h3>
+                        <button class="ui-btn ui-btn-b" id="upload_btn">Upload</button>
+                    </div>
+                </div>
+            </div>
+            <!-- SECOND PAGE -->
+            <div data-role="page" id="start_page">
+                <div class="ui-body-b ui-body">
+                    <div class="connection_status">
+                        <h4>Connecting</h4>
+                        <div class="dot"></div>
+                    </div>
+                    <h1></h1>
+                    <div class="title"></div>
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a href="#upload_page" data-icon="cloud" data-transition="slide" data-direction="reverse">Upload</a></li>
+                            <li><a href="#start_page" data-icon="power" class="ui-btn-active ui-focus ui-state-persist get_music_files" data-transition="slide">Music</a></li>
+                            <li><a href="#playlist_page" data-icon="bars" data-transition="slide">Playlists</a></li>
+                            <li><a href="#settings_page" data-transition="slide" data-icon="gear">Settings</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ui-grid-solo" style="margin-bottom: 70px;">
+                    <div class="ui-block-a">
+                        <div id="music_player">
+                            <h2> All Music Files</h2>
+                            <div id="music_files">
+                                <!-- Popup to add song to playlist -->
+                                <div data-role="popup" id="popupPl" data-theme="b" class="ui-corner-all" style="border: 2px solid rgb(237,92,0);">
+                                    <form>
+                                        <div style="padding:10px 20px;">
+                                            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                                            <h3>Choose a playlist:</h3>
+                                            <div class="playlist_listing"></div>
+                                            <h3>or add a new one:</h3>
+                                            <label for="pl" class="ui-hidden-accessible">Playlist name:</label>
+                                            <input type="text" name="pl_name" id="pl" value="" placeholder="playlist name" data-theme="b">
+                                            <button type="submit" class="submit_playlist ui-btn ui-corner-all ui-shadow ui-btn-b">Add Playlist</button>
+                                            <p id="pl_message"></p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid-solo">
+                    <div class="ui-block-a">
+                        <div class="bot_bar">
+                            <div class='prev_img'></div>
+                            <div class='stop_img'></div>
+                            <div class='next_img'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- THIRD PAGE -->
+            <div data-role="page" id="playlist_page">
+                <div class="ui-body-b ui-body">
+                    <div class="connection_status">
+                        <h4>Connecting</h4>
+                        <div class="dot"></div>
+                    </div>
+                    <h1></h1>
+                    <div class="title"></div>
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a href="#upload_page" data-icon="cloud" data-transition="slide" data-direction="reverse">Upload</a></li>
+                            <li><a href="#start_page" data-icon="power" data-transition="slide" data-direction="reverse">Music</a></li>
+                            <li><a href="#playlist_page" data-icon="bars" class="ui-btn-active ui-focus ui-state-persist" data-transition="slide">Playlists</a></li>
+                            <li><a href="#settings_page" data-transition="slide" data-icon="gear">Settings</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ui-grid-solo" style="margin-bottom: 70px;">
+                    <div class="ui-block-a">
+                        <div id="playlists"></div>
+                    </div>
+                </div>
+                <div class="ui-grid-solo">
+                    <div class="ui-block-a">
+                        <div class="bot_bar">
+                            <div class='prev_img'></div>
+                            <div class='stop_img'></div>
+                            <div class='next_img'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FOURTH PAGE -->
+            <div data-role="page" id="settings_page">
+                <div class="ui-body-b ui-body">
+                    <div class="connection_status">
+                        <h4>Connecting</h4>
+                        <div class="dot"></div>
+                    </div>
+                    <h1></h1>
+                    <div class="title"></div>
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a href="#upload_page" data-icon="cloud" data-transition="slide" data-direction="reverse">Upload</a></li>
+                            <li><a href="#start_page" data-icon="power" data-transition="slide" data-direction="reverse">Music</a></li>
+                            <li><a href="#playlist_page" data-icon="bars" data-transition="slide" data-direction="reverse">Playlists</a></li>
+                            <li><a href="#settings_page" data-transition="slide" data-icon="gear" class="ui-btn-active ui-focus ui-state-persist">Settings</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ui-grid-solo" style="margin-bottom: 70px;">
+                    <div class="ui-block-a"> 
+                        <div id="settingsform">
+                            <label for="freq"><h2>Set the frequency:</h2></label>
+                            <div class="form-group">
+                                <input type="number" value="" class="form-control" id="freq" style="background-color: rgb(237,92,0);text-shadow: none; font-weight: bold;">
+                            </div>
+                            <button class="ui-btn ui-btn-b" id="save-settings">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/my_functions.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>

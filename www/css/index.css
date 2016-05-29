@@ -61,7 +61,7 @@ html head + body .ui-body-a.ui-focus {
     -moz-box-shadow: 0 0 12px #FF9900 !important;
     box-shadow: 0 0 12px #FF9900 !important;
 }
-#upload_success_popup{
+#upload_success_popup, #saved-settings-success{
     background-color: #73BD74 !important;
 }
  /* END OF JQUERY MOBILE OVERIDE */

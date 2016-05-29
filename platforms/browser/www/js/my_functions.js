@@ -104,7 +104,11 @@ function setSettings(){
         dataType: 'json',
         async: true,
         success: function(msg){
-            //success
+          $('#saved-settings-success').popup('open');
+          $('#saved-settings-success').fadeOut(6000);
+          var popupclose = setTimeout(function(){
+              $('#saved-settings-success').popup('close');
+          }, 4000);
         }
     });
 }

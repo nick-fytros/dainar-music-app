@@ -155,6 +155,7 @@ var app = {
                             $('#progress .bar').css('width',0 + '%');
                             $('#progress .bar').html(0+'%');
                             $('#progress .bar').attr('aria-valuenow',0);
+                            $('#upload_success_popup').fadeIn();
                             $('#upload_success_popup').fadeOut(6000);
                             var popupclose = setTimeout(function(){
                                 $('#upload_success_popup').popup('close');
@@ -213,7 +214,7 @@ var app = {
             $(this).toggleClass('play_img');
             $(this).toggleClass('pause_img');
             $.get(SERVER_ADDRESS+'/play/'+song_name+'/'+play_type,function(data){
-                
+
             });
         });
         /* stop button click */
@@ -221,19 +222,19 @@ var app = {
             $('div.pause_img').addClass('play_img');
             $('div.play_img').removeClass('pause_img');
             $.get(SERVER_ADDRESS+'/stop',function(data){
-                
+
             });
         });
         /* play next song */
         $(document).on('tap','div.next_img', function(){
             $.get(SERVER_ADDRESS+'/play/next',function(data){
-                
+
             });
         });
         /* play previous song */
         $(document).on('tap','div.prev_img', function(){
             $.get(SERVER_ADDRESS+'/play/previous',function(data){
-                
+
             });
         });
         /* delete button click*/
@@ -393,6 +394,6 @@ var app = {
                 $('#progress .bar').attr('aria-valuenow',progress);
             }
         });
-        
+
     }
 };

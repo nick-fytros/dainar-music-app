@@ -104,9 +104,10 @@ function setSettings(){
         dataType: 'json',
         async: true,
         success: function(msg){
+          $('#saved-settings-success').fadeIn();
           $('#saved-settings-success').popup('open');
-          $('#saved-settings-success').fadeOut(6000);
-          var popupclose = setTimeout(function(){
+          $('#saved-settings-success').fadeOut(5000);
+          setTimeout(function(){
               $('#saved-settings-success').popup('close');
           }, 4000);
         }

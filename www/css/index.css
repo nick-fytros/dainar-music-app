@@ -215,6 +215,11 @@ div.delete_file, div.add_button{
     width: 7em;
 }
 
+.press-btn{
+  transition: transform .1s ease-in-out;
+  transform: scale(1.1);
+}
+
 div.add_button{
     width: 11em;
 }

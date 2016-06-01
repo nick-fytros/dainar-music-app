@@ -221,18 +221,27 @@ var app = {
         $(document).on('tap','div.stop_img',function(){
             $('div.pause_img').addClass('play_img');
             $('div.play_img').removeClass('pause_img');
+            var btn = $(this);
+            btn.addClass('press-btn');
+            setTimeout(function(){ btn.removeClass('press-btn'); }, 100);
             $.get(SERVER_ADDRESS+'/stop',function(data){
 
             });
         });
         /* play next song */
         $(document).on('tap','div.next_img', function(){
+            var btn = $(this);
+            btn.addClass('press-btn');
+            setTimeout(function(){ btn.removeClass('press-btn'); }, 100);
             $.get(SERVER_ADDRESS+'/play/next',function(data){
 
             });
         });
         /* play previous song */
         $(document).on('tap','div.prev_img', function(){
+            var btn = $(this);
+            btn.addClass('press-btn');
+            setTimeout(function(){ btn.removeClass('press-btn'); }, 100);
             $.get(SERVER_ADDRESS+'/play/previous',function(data){
 
             });

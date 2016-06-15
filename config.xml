@@ -1,4 +1,4 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.dainarmusic" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.dainarmusic" version="0.0.1">
   <name>DainarMusic</name>
   <description>Listen to your music through your radio with Dainar music!!</description>
   <author href="https://github.com/nick-fytros" email="fytros.n@gmail.com">Nick Fytros</author>
@@ -20,8 +20,6 @@
   <preference name="android-installLocation" value="auto"/>
   <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
   <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root" />
-  <gap:plugin name="org.apache.cordova.battery-status"/>
-  <gap:plugin name="org.apache.cordova.camera"/>
   <gap:plugin name="org.apache.cordova.media-capture"/>
   <gap:plugin name="org.apache.cordova.console"/>
   <gap:plugin name="org.apache.cordova.contacts"/>
@@ -31,8 +29,6 @@
   <gap:plugin name="org.apache.cordova.dialogs"/>
   <gap:plugin name="org.apache.cordova.file"/>
   <gap:plugin name="org.apache.cordova.file-transfer"/>
-  <gap:plugin name="org.apache.cordova.geolocation"/>
-  <gap:plugin name="org.apache.cordova.globalization"/>
   <gap:plugin name="org.apache.cordova.inappbrowser"/>
   <gap:plugin name="org.apache.cordova.media"/>
   <gap:plugin name="org.apache.cordova.network-information"/>
